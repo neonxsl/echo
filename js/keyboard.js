@@ -175,6 +175,19 @@ export function initKeyboardNavigation({
             }
     });
 
+    window.addEventListener('wheel', (e) => {
+        e.preventDefault();
+    }, { capture: true, passive: false });
+
+    ['click', 'mousedown', 'mouseup', 'dblclick', 'contextmenu', 'dragstart', 'drop'].forEach((type) => {
+        window.addEventListener(type, (e) => {
+            if (e.isTrusted) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            }
+        }, { capture: true });
+    });
+    
     searchInput?.addEventListener('input', (e) => {
         selectedVisualIndex = 0;
         onFilterTracks(e.target.value.toLowerCase().trim());

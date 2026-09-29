@@ -14,6 +14,7 @@ export const dom = {
     nowPlayingArt: document.getElementById('now-playing-art'),
     btnPrev: document.getElementById('btn-prev'),
     btnNext: document.getElementById('btn-next'),
+    artworkWrapper: document.querySelector('.artwork-wrapper'),
 };
 
 function resolveMimeType(file) {
@@ -117,6 +118,15 @@ export function updateNowPlaying(track, index, totalTracks) {
 
     dom.btnNext.disabled = index === totalTracks - 1;
     dom.btnPrev.disabled = index === 0;
+
+    if (track.coverURL) {
+        dom.nowPlayingArt.src = track.coverURL;
+        dom.nowPlayingArt.hidden = false;
+        dom.artworkWrapper.style.setProperty('--art-glow', `url("${track.coverURL}")`);
+    } else {
+        dom.nowPlayingArt.hidden = true;
+        dom.artworkWrapper.style.removeProperty('--art-glow');
+    }
 
     const buttons = dom.trackList.querySelectorAll('button');
     buttons.forEach((btn, idx) => {
