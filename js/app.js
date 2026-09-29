@@ -12,6 +12,13 @@ const state = {
 };
 
 const engine = new AudioEngine(dom.audio);
+
+engine.initAnalyser((bass) => {
+    const opacity = (bass * 0.8).toFixed(2);
+    dom.artworkWrapper?.style.setProperty('--glow-opacity', opacity);
+});
+
+
 const lyricsView = document.getElementById('lyrics-view');
 const btnPlayPause = document.getElementById('btn-play-pause');
 

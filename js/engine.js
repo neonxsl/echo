@@ -67,7 +67,44 @@ export class AudioEngine {
         }
     }
 
+    initAnalyser(onBassupdate) {
+        if (this.analyser) return;
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        this.audioCtx = new AudioCtx();
+        const source = this.audioCtx.createMediaElementSource(this.audio);
+        this.analyser = this.audioCtx.createAnalyser();
+        this.analyser.fftSize = 512;
+        source.connect(this.analyser);
+        this.analyser.connect(this.audioCtx.destination);
+
+        const binSize = this.audioCtx.sampleRate / this.analyser.fftSize;
+        const startBin = Math.floor(20 / binSize);
+        const endBin = Math.floor(256 / binSize);
+        const buffer = new Uint8Array(this.analyser.frequencyBinCount);
+
+        const render = () => {
+            if (!this.audio.paused) {
+                this.analyser.getByteFrequencyData(buffer);
+                let sum = 0;
+                let count = 0;
+                for (let i = startBin; i <= endBin; i++) {
+                    sum += buffer[i];
+                    count++;
+                }
+                const bass = count ? sum / count / 255 : 50;
+                onBassupdate(bass);
+
+            }
+            requestAnimationFrame(render);
+        };
+        requestAnimationFrame(render);
+
+    }
+
     play() {
+        if (this.audioCtx && this.audioCtx.state === 'suspended') {
+            this.audioCtx.resume();
+        }
         return this.audio.play();
     }
 
