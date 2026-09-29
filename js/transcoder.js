@@ -24,6 +24,8 @@ export async function transcodeToWave(file) {
         corePath: 'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
     });
 
+    // you for some reason HAVE to use core-st... spend so long trynna fix it D:
+
     await ffmpeg.load();
 
     const inputName = `in_${Date.now()}.m4a`;

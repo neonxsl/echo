@@ -7,41 +7,113 @@ export const dom = {
     trackCount: document.getElementById('track-count'),
     nowPlayingTitle: document.getElementById('now-playing-title'),
     nowPlayingMeta: document.getElementById('now-playing-meta'),
+    nowPlayingArtist: document.getElementById('now-playing-artist'),
+    nowPlayingAlbum: document.getElementById('now-playing-album'),
+    nowPlayingYear: document.getElementById('now-playing-year'),
+    nowPlayingDetails: document.getElementById('now-playing-details'),
+    nowPlayingArt: document.getElementById('now-playing-art'),
     btnPrev: document.getElementById('btn-prev'),
     btnNext: document.getElementById('btn-next'),
 };
 
 function resolveMimeType(file) {
+    if (!file) return 'Unknown';
     if (file.type) return file.type;
-    const ext = file.name.split('.').pop().toLowerCase();
-    return MIME_TYPES[ext] || 'unknown/unknown';
+    const fileName = file.name || '';
+    const ext = fileName.split('.').pop()?.toLowerCase();
+    return MIME_TYPES[ext] || 'Unknown';
 }
 
 export function renderPlaylist(tracks, onSelectTrack) {
     dom.trackList.innerHTML = '';
     dom.trackCount.textContent = tracks.length;
 
-    tracks.forEach((file, index) => {
+    tracks.forEach((track, index) => {
         const li = document.createElement('li');
-        const button = document.createElement('button');
 
+        const button = document.createElement('button');
         button.type = 'button';
-        button.textContent = file.name;
-        button.addEventListener('click', () => onSelectTrack(index));
         button.dataset.index = index;
-        button.dataset.mimeType = resolveMimeType(file);
+
+        const img = document.createElement('img');
+        img.width = 24;
+        img.height = 24;
+        img.style.verticalAlign = 'middle';
+        img.style.marginRight = '10px';
+        img.alt = 'cover art';
+        img.hidden = !track.coverURL;
+        if (track.coverURL) {
+            img.src = track.coverURL;
+        }
+
+        const label = document.createElement('span');
+        label.innerHTML = `<strong>${track.title}</strong> - <small>${track.artist}</small>`;
+
+        button.appendChild(img);
+        button.appendChild(label);
+        button.addEventListener('click', () => onSelectTrack(index));
 
         li.appendChild(button);
         dom.trackList.appendChild(li);
-    } );
+    });
+
+    
 }
 
-export function updateNowPlaying(file, index, totalTracks) {
+export function updateTrackItem(index, track) {
+    const li = dom.trackList.children[index];
+    if (!li) return;
+
+    const button = li.querySelector('button');
+    if (!button) return;
+
+    let img = button.querySelector('img');
+    if (!img) {
+        img = document.createElement('img');
+        img.width = 24;
+        img.height = 24;
+        img.style.verticalAlign = 'middle';
+        img.style.marginRight = '10px';
+        img.alt = 'cover art';
+        button.prepend(img);
+    }
+    
+    if (track.coverURL) {
+        img.src = track.coverURL;
+        img.hidden = false;
+    }
+
+    let span = button.querySelector('span');
+    if (!span) {
+        span = document.createElement('span');
+        button.appendChild(span);
+    }
+    span.innerHTML = `<strong>${track.title}</strong> - <small>${track.artist}</small>`;
+}
+
+export function updateNowPlaying(track, index, totalTracks) {
+    const file = track.file || track;
     const mimeType = resolveMimeType(file);
     const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
 
-    dom.nowPlayingTitle.textContent = `${index + 1}. ${file.name}`;
-    dom.nowPlayingMeta.textContent = `format: ${mimeType}, size: ${sizeMb} MB, track ${index + 1} of ${totalTracks}`;
+    if (track.coverURL) {
+        dom.nowPlayingArt.src = track.coverURL;
+        dom.nowPlayingArt.hidden = false;
+    } else {
+        dom.nowPlayingArt.hidden = true;
+    }
+
+    dom.nowPlayingTitle.textContent = `${index + 1}. ${track.title}`;
+    dom.nowPlayingArtist.textContent = `Artist: ${track.artist}`;
+    dom.nowPlayingAlbum.textContent = `Album: ${track.album}${track.year ? ` (${track.year})` : ''}`;
+  
+    const detailParts = [];
+    if (track.genre) detailParts.push(`Genre: ${track.genre}`);
+    if (track.bitrate) detailParts.push(`Bitrate: ${track.bitrate}`);
+    dom.nowPlayingDetails.textContent = detailParts.join(' | ');
+
+    dom.nowPlayingMeta.textContent = `Format: ${mimeType} | Size: ${sizeMb} MB`;
+
 
     dom.btnNext.disabled = index === totalTracks - 1;
     dom.btnPrev.disabled = index === 0;

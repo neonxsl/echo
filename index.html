@@ -13,8 +13,16 @@
     </header>
 
     <section aria-label="playback controls">
-        <h2 id="now-playing-title">no track playing</h2>
-        <p id="now-playing-meta">format: | size: </p>
+        <div>
+            <img id="now-playing-art" width="200" height="200" src="" alt="album art" hidden>
+        </div>
+        <h2 id="now-playing-title">No track selected</h2>
+
+        <p id="now-playing-artist"></p>
+        <p id="now-playing-album"></p>
+        <p id="now-playing-year"></p>
+        <p id="now-playing-details"></p>
+        <p id="now-playing-meta">format: - | size: -</p>
 
         <audio id="audio" controls></audio>
         <div>

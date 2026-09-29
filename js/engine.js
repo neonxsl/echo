@@ -43,10 +43,10 @@ export class AudioEngine {
         this.audio.src = this.currentBlobUrl;
     }
 
-    load(file) {
-        this.currentFile = file;
-        this.setSource(file);
-        this.updateMediaSession(file);
+    load(track) {
+        this.currentFile = track.file;
+        this.setSource(track.file);
+        this.updateMediaSession(track);
     }
 
     async transcodeALAC(file) {
@@ -69,13 +69,16 @@ export class AudioEngine {
         this.audio.pause();
     }
 
-    updateMediaSession(file) {
+    updateMediaSession(track) {
         if (!('mediaSession' in navigator)) return;
 
+        const artwork = track.coverUrl ? [{ src: track.coverURL, sizes: '512x512', type: 'image/jpeg' }] : [];
+
         navigator.mediaSession.metadata = new MediaMetadata({
-            title: stripExtension(file.name),
-            album: '',
-            artist: '',
+            title: track.title,
+            artist: track.artist,
+            album: track.album,
+            artwork: artwork
         });
     }
 

@@ -1,6 +1,7 @@
-import { dom, renderPlaylist, updateNowPlaying } from './ui.js';
+import { dom, renderPlaylist, updateTrackItem, updateNowPlaying } from './ui.js';
 import { AudioEngine } from './engine.js';
 import { scanFolder } from './indexer.js';
+import { parseTrackMetadata } from './metadata.js';
 
 const state = {
     tracks: [],
@@ -17,14 +18,14 @@ function playTrack(index) {
     if (index < 0 || index >= state.tracks.length) return;
 
     state.currentIndex = index;
-    const file = state.tracks[index];
+    const track = state.tracks[index];
 
-    engine.load(file);
+    engine.load(track);
 
     engine.play().catch(err => console.error('bruh error:', err));
 
-    
-    updateNowPlaying(file, index, state.tracks.length);
+
+    updateNowPlaying(track, index, state.tracks.length);
 }
 
 function playNext() {
@@ -46,6 +47,23 @@ engine.setMediaSessionHandlers({
 
 engine.onTrackEnded = playNext;
 
+async function parseAllTracksMetadata() {
+    for (let i = 0; i < state.tracks.length; i++) {
+        const track = state.tracks[i];
+        const meta = await parseTrackMetadata(track.file);
+
+        Object.assign(track, meta);
+        updateTrackItem(i, track);
+
+        if (state.currentIndex === i) {
+            updateNowPlaying(track, i, state.tracks.length);
+        }
+    }
+}
+
+
+
+
 dom.dirPicker.addEventListener('change', (e) => {
     const tracks = scanFolder(e.target.files);
 
@@ -54,11 +72,22 @@ dom.dirPicker.addEventListener('change', (e) => {
         return;
     }
 
-    state.tracks = tracks;
+    state.tracks = tracks.map(file => ({
+        file,
+        title: file.name.replace(/\.[^/.]+$/, ''),
+        artist: 'unknown artist',
+        album: 'unknown album',
+        year: '1970',
+        genre: '',
+        bitrate: '',
+        coverURL: null,
+    }));
     renderPlaylist(state.tracks, (selectedIndex) => {
         playTrack(selectedIndex);
     });
     playTrack(0);
+
+    parseAllTracksMetadata();
 
 });
 
