@@ -7,6 +7,9 @@ you cannot use tab asw!
 > [!NOTE]
 > this project only works on chromium based browsers as the File System Access API only exists on there!
 
+<img width="1635" height="984" alt="Screenshot 2026-09-29 at 9 08 19 pm" src="https://github.com/user-attachments/assets/a9a67247-fedd-4257-9f1b-f8dcf657debf" />
+
+
 ---
 
 ## features
@@ -17,6 +20,8 @@ you cannot use tab asw!
 - metadata handling: extracts metadata from da songs and caches the id3 tags, bitrates and even album art in indexedDB to avoid re-parsin every single time
 - lyric view!!! - thanks a ton to am-lyrics by binimum (ily) https://github.com/binimum/am-lyrics
 - search feature and shuffle and playback controls: qol stuff
+
+<img width="415" height="473" alt="Screenshot 2026-09-29 at 9 12 00 pm" src="https://github.com/user-attachments/assets/01e0e3ad-a39a-45cd-b1fa-4bc428e2cac1" />
 
 ---
 
@@ -38,7 +43,10 @@ you cannot use tab asw!
 | H | toggle keyboard controls cheat sheet (help menu) |
 | Tab | strictly banned (triggers notification) |
 
+<img width="451" height="501" alt="Screenshot 2026-09-29 at 9 15 46 pm" src="https://github.com/user-attachments/assets/ea6c5ee0-45d9-4387-957b-6055d54e6a5d" />
+
 ---
+
 
 ## stack
 - frontend: vanilla js, html, css
@@ -47,6 +55,11 @@ you cannot use tab asw!
 - tag parsing: music-metadata-browser
 - transcoding: ffmpeg
 - lyrics: am-lyrics
+
+per word lyrics:
+
+<img width="451" height="945" alt="Screenshot 2026-09-29 at 9 15 09 pm" src="https://github.com/user-attachments/assets/0afe96ac-8fc4-4773-9c28-60997640ff22" />
+
 
 ---
 
