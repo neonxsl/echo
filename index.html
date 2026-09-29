@@ -9,16 +9,25 @@
 </head>
 <body>
 
+<div id="tab-toast" class="tab-toast">
+    <p>tab is BANNED hehhe (try using arrow keys!)</p>
+</div>
+
 <div class="app-layout">
     <aside class="panel tracks panel" aria-label="playlist">
             <header class="tracks-header">
         <h1 class="logo"> echo</h1>
-            <label for="dir-picker" class="file-picker-label">select music folder</label>
+            <label for="dir-picker" class="file-picker-label"><kbd>O</kbd> select music folder</label>
             <input type="file" id="dir-picker" webkitdirectory directory multiple>
         </header>
 
+        <div class="search-contianer">
+            <input type="text" id="search-input" placeholder="search tracks... (press /)" auto-complete="off">
+            <kbd class="search-badge">/</kbd>
+        </div>
+
         <div class="tracks-subheading">
-            <span>tracks</span>
+            <span>tracks <small class="hint">[J / K to navigate]</small></span>
             <span id="track-count">0</span>
         </div>
 
@@ -37,8 +46,9 @@
             <audio id="audio" controls></audio>
 
             <div class="transport-buttons"> <!-- is that what its called??? -->
-                <button id="btn-prev" disabled>prev</button>
-                <button id="btn-next" disabled>next</button>
+                <button id="btn-prev" disabled><kbd>P</kbd> prev</button>
+                <button id="btn-play-pause" disabled><kbd>Space</kbd> play</button>
+                <button id="btn-next" disabled><kbd>N</kbd> next</button>
 
             </div>
 
@@ -77,6 +87,38 @@
 
 </aside>
 </div>
+
+<footer class="tooltips">
+    <div><kbd>J</kbd>/<kbd>K</kbd> or <kbd>↑</kbd>/<kbd>↓</kbd> move</div>
+    <div><kbd>Enter</kbd> play</div>
+    <div><kbd>Space</kbd> play/pause</div>
+    <div><kbd>←</kbd>/<kbd>→</kbd> seek</div>
+    <div><kbd>/</kbd> search</div>
+    <div><kbd>O</kbd> open folder</div>
+    <div><kbd>H</kbd> help</div>
+</footer>
+
+<div id="help-modal" class="modal-backdrop">
+    <div class="modal-box">
+        <h3>keyboard controls (#tabbed)</h3>
+        <ul>
+            <li><kbd>J</kbd> / <kbd>↓</kbd> : Move selection down</li>
+            <li><kbd>K</kbd> / <kbd>↑</kbd> : move selection up</li>
+            <li><kbd>Enter</kbd> : play selected track</li>
+            <li><kbd>Space</kbd> : toggle play / pause</li>
+            <li><kbd>N</kbd> / <kbd>P</kbd> : next / previous track</li>
+            <li><kbd>←</kbd> / <kbd>→</kbd> : seek backward / forward</li>
+            <li><kbd>/</kbd> : search tracklist (esc to cancel)</li>
+            <li><kbd>O</kbd> : open folder dialog</li>
+            <li><kbd>Tab</kbd> : <b>BANNED!</b></li>
+        </ul>
+        <p class="modal-close-hint">press <kbd>Esc</kbd> or <kbd>H</kbd> to dismiss</p>
+    </div>
+
+    </div> 
+
+
+
     <script type="module" src="./js/app.js"></script>
 </body>
 </html>

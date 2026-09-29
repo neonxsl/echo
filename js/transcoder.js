@@ -24,8 +24,6 @@ export async function transcodeToWave(file) {
         corePath: 'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
     });
 
-    // you for some reason HAVE to use core-st... spend so long trynna fix it D:
-
     await ffmpeg.load();
 
     const inputName = `in_${Date.now()}.m4a`;
@@ -38,11 +36,11 @@ export async function transcodeToWave(file) {
     const data = ffmpeg.FS('readFile', outputName);
 
     try {
-    ffmpeg.FS('unlink', inputName);
-    ffmpeg.FS('unlink', outputName);
+        ffmpeg.FS('unlink', inputName);
+        ffmpeg.FS('unlink', outputName);
     } catch (err) {
         console.warn('error cleaning up ffmpeg files', err);
     }
 
     return new Blob([data.buffer], { type: 'audio/wav' });
-}   
+}

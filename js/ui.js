@@ -103,9 +103,9 @@ export function updateNowPlaying(track, index, totalTracks) {
         dom.nowPlayingArt.hidden = true;
     }
 
-    dom.nowPlayingTitle.textContent = `${index + 1}. ${track.title}`;
-    dom.nowPlayingArtist.textContent = `artist: ${track.artist}`;
-    dom.nowPlayingAlbum.textContent = `album: ${track.album}${track.year ? ` (${track.year})` : ''}`;
+    dom.nowPlayingTitle.textContent = `${track.title}`;
+    dom.nowPlayingArtist.textContent = `${track.artist}`;
+    dom.nowPlayingAlbum.textContent = `${track.album}${track.year ? ` (${track.year})` : ''}`;
   
     const detailParts = [];
     if (track.genre) detailParts.push(`genre: ${track.genre}`);

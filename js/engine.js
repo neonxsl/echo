@@ -50,14 +50,20 @@ export class AudioEngine {
     }
 
     async transcodeALAC(file) {
+        if (this.isTranscoding) return;
+        this.isTranscoding = true;
         try {
             if (this.onStateChange) this.onStateChange('transcoding');
             const waveBlob = await transcodeToWave(file);
             this.setSource(waveBlob);
-            await this.play();
+            try {
+                await this.play();
+            } catch (playErr) {}
             if (this.onStateChange) this.onStateChange('ready');
         } catch (err) {
             console.error('error transcoding to alac', err);
+        } finally {
+            this.isTranscoding = false;
         }
     }
 

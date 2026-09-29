@@ -8,5 +8,5 @@ export function scanFolder(fileList) {
         const lowerName = file.name.toLowerCase();
         return SUPPORTED_EXTENSIONS.some(ext => lowerName.endsWith(ext.toLowerCase()));
     })
-    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numberic: true, sensitivity: 'base' }));
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
 }
