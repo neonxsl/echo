@@ -23,7 +23,7 @@ body {
 
 .app-layout {
     display: grid;
-    grid-template-columns: 340px 1fr 320px;
+    grid-template-columns: 340px 1fr 460px;
     height: 100vh;
     width: 100vw;
 }
@@ -251,4 +251,36 @@ audio {
 .tech-specs-card p {
     font-size: 0.875rem;
     color: rgba(255, 255, 255, 0.5);
+}
+
+
+.lyrics-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    flex: 1;
+    min-height: 260px;
+}
+
+.lyrics-header {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+am-lyrics {
+    width: 100%;
+    height: 100%;
+    font-family: "Space Grotesk", sans-serif;
+
+    --lyplus-font-size-base: 48px;
+    --am-lyrics-compact-font-size: 32px;
+    --am-lyrics-line-spacing: 14px;
+    --am-lyrics-line-height: 1.5;
+
+    --am-lyrics-highlight-color: #ffffff;
+    --am-lyrics-highlight-surface: rgba(255, 255, 255, 0.08);
 }

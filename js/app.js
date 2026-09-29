@@ -9,6 +9,22 @@ const state = {
 };
 
 const engine = new AudioEngine(dom.audio);
+const lyricsView = document.getElementById('lyrics-view');
+
+dom.audio.addEventListener('timeupdate', () => {
+    if (lyricsView) {
+        lyricsView.currentTime = dom.audio.currentTime * 1000;
+    }
+});
+
+function updateLyrics(track) {
+    if (!lyricsView || !track) return;
+    lyricsView.songTitle = track.title || '';
+    lyricsView.songArtist = (track.artist && track.artist !== 'unknown artist') ? track.artist : '';
+    lyricsView.songAlbum = (track.album && track.album !== 'unknown album') ? track.album : '';
+    lyricsView.query = `${track.title} ${lyricsView.songArtist}`.trim();
+}
+
 
 engine.onStateChange = (status) => {
     dom.nowPlayingMeta.textContent = status;
@@ -26,6 +42,7 @@ function playTrack(index) {
 
 
     updateNowPlaying(track, index, state.tracks.length);
+    updateLyrics(track);
 }
 
 function playNext() {
@@ -57,6 +74,7 @@ async function parseAllTracksMetadata() {
 
         if (state.currentIndex === i) {
             updateNowPlaying(track, i, state.tracks.length);
+            updateLyrics(track);
         }
     }
 }
