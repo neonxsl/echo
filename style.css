@@ -226,6 +226,11 @@ audio::-webkit-media-controls-enclosure {
     
 }
 
+.transport-buttons button.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
 .transport-buttons button {
     background: #000;
     border: 1px solid var(--border);

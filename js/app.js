@@ -9,7 +9,16 @@ const state = {
     tracks: [],
     filteredTracks: [],
     currentIndex: -1,
+    isShuffle: false,
 };
+
+function toggleShuffle() {
+    state.isShuffle = !state.isShuffle;
+    const btn = document.getElementById('btn-shuffle');
+    if (btn) {
+        btn.classList.toggle('active', state.isShuffle);
+    }
+}
 
 const engine = new AudioEngine(dom.audio);
 
@@ -18,6 +27,7 @@ engine.initAnalyser((bass) => {
     const opacity = (0.2 + punchBass * 0.5).toFixed(2);
     dom.artworkWrapper?.style.setProperty('--glow-opacity', opacity);
 });
+
 
 
 const lyricsView = document.getElementById('lyrics-view');
@@ -193,6 +203,17 @@ function playTrack(index) {
 
 function playNext() {
     const list = getActiveList();
+    if (list.length === 0) return;
+
+    if (state.isShuffle && list.length > 1) {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * list.length);
+        } while (randomIndex === state.currentIndex);
+        playTrack(randomIndex);
+        return;
+    }
+
     if (state.currentIndex < list.length - 1) {
         playTrack(state.currentIndex + 1);
     }
@@ -228,6 +249,7 @@ const keyboardController = initKeyboardNavigation({
     playPrev,
     onFilterTracks,
     dirPickerAction: openFolder,
+    onToggleShuffle: toggleShuffle,
 });
 
 engine.setMediaSessionHandlers({

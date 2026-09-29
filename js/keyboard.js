@@ -6,6 +6,7 @@ export function initKeyboardNavigation({
     playPrev,
     onFilterTracks,
     dirPickerAction,
+    onToggleShuffle,
 }) {
     let selectedVisualIndex = 0;
     const searchInput = document.getElementById('search-input');
@@ -92,6 +93,12 @@ export function initKeyboardNavigation({
                         dirPickerAction.click();
                     }
                 break;
+
+                case 's':
+                case 'S':
+                    e.preventDefault();
+                    onToggleShuffle?.();
+                    break;
 
                 case 'h':
                 case 'H':
