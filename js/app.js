@@ -14,7 +14,8 @@ const state = {
 const engine = new AudioEngine(dom.audio);
 
 engine.initAnalyser((bass) => {
-    const opacity = (bass * 0.8).toFixed(2);
+    const punchBass = Math.pow(bass, 2.5);
+    const opacity = (0.2 + punchBass * 0.5).toFixed(2);
     dom.artworkWrapper?.style.setProperty('--glow-opacity', opacity);
 });
 
