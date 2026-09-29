@@ -7,6 +7,8 @@ you cannot use tab asw!
 > [!NOTE]
 > this project only works on chromium based browsers as the File System Access API only exists on there!
 
+live at: https://echo.neonxsl.dev
+
 <img width="1626" height="977" alt="Screenshot 2026-09-29 at 9 18 32 pm" src="https://github.com/user-attachments/assets/bf1bbc1a-62f9-4be2-a8f5-71e550257a2e" />
 
 
