@@ -9,6 +9,10 @@ const state = {
 
 const engine = new AudioEngine(dom.audio);
 
+engine.onStateChange = (status) => {
+    dom.nowPlayingMeta.textContent = status;
+
+}
 function playTrack(index) {
     if (index < 0 || index >= state.tracks.length) return;
 
@@ -16,7 +20,10 @@ function playTrack(index) {
     const file = state.tracks[index];
 
     engine.load(file);
+
     engine.play().catch(err => console.error('bruh error:', err));
+
+    
     updateNowPlaying(file, index, state.tracks.length);
 }
 
