@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>echo - music player</title>
+</head>
+<body>
+    <header>
+        <h1> echo (testing for now)</h1>
+        <label for="dir-picker">select music folder</label>
+        <input type="file" id="dir-picker" webkitdirectory directory multiple>
+    </header>
+
+    <section aria-label="playback controls">
+        <h2 id="now-playing-title">no track playing</h2>
+        <p id="now-playing-meta">format: | size: </p>
+
+        <audio id="audio" controls></audio>
+        <div>
+            <button id="btn-prev" disabled>prev</button>
+            <button id="btn-next" disabled>next</button>
+        </div>
+    </section>
+
+    <section aria-label="playlist">
+        <h2>tracks (<span id="track-count">0</span>)</h2>
+        <ol id="track-list"></ol>
+    </section>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
