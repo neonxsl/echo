@@ -48,7 +48,7 @@ export function renderPlaylist(tracks, onSelectTrack) {
         }
 
         const label = document.createElement('span');
-        label.innerHTML = `<strong>${track.title}</strong> - <small>${track.artist}</small>`;
+        label.innerHTML = `<strong>${track.title}</strong><small>${track.artist}</small>`;
 
         button.appendChild(img);
         button.appendChild(label);
@@ -89,7 +89,7 @@ export function updateTrackItem(index, track) {
         span = document.createElement('span');
         button.appendChild(span);
     }
-    span.innerHTML = `<strong>${track.title}</strong> - <small>${track.artist}</small>`;
+    span.innerHTML = `<strong>${track.title}</strong><small>${track.artist}</small>`;
 }
 
 export function updateNowPlaying(track, index, totalTracks) {
