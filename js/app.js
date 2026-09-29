@@ -157,7 +157,25 @@ engine.audio.addEventListener('pause', () => {
     }
 });
 
-dom.audio.addEventListener('timeupdate', () => {
+let lyricsFrameId = null;
+
+function syncLyricsSmoothly() {
+    if (lyricsView && !dom.audio.paused) {
+        lyricsView.currentTime = dom.audio.currentTime * 1000;
+    }
+    lyricsFrameId = requestAnimationFrame(syncLyricsSmoothly);
+}
+
+dom.audio.addEventListener('play', () => {
+    cancelAnimationFrame(lyricsFrameId);
+    lyricsFrameId = requestAnimationFrame(syncLyricsSmoothly);
+});
+
+dom.audio.addEventListener('pause', () => {
+    cancelAnimationFrame(lyricsFrameId);
+});
+
+dom.audio.addEventListener('seeked', () => {
     if (lyricsView) {
         lyricsView.currentTime = dom.audio.currentTime * 1000;
     }
