@@ -4,38 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>echo - music player</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <header>
-        <h1> echo (testing for now)</h1>
-        <label for="dir-picker">select music folder</label>
-        <input type="file" id="dir-picker" webkitdirectory directory multiple>
-    </header>
 
-    <section aria-label="playback controls">
-        <div>
-            <img id="now-playing-art" width="200" height="200" src="" alt="album art" hidden>
+<div class="app-layout">
+    <aside class="panel tracks panel" aria-label="playlist">
+            <header class="tracks-header">
+        <h1 class="logo"> echo</h1>
+            <label for="dir-picker" class="file-picker-label">select music folder</label>
+            <input type="file" id="dir-picker" webkitdirectory directory multiple>
+        </header>
+
+        <div class="tracks-subheading">
+            <span>tracks</span>
+            <span id="track-count">0</span>
         </div>
-        <h2 id="now-playing-title">No track selected</h2>
 
-        <p id="now-playing-artist"></p>
-        <p id="now-playing-album"></p>
-        <p id="now-playing-year"></p>
-        <p id="now-playing-details"></p>
-        <p id="now-playing-meta">format: - | size: -</p>
-
-        <audio id="audio" controls></audio>
-        <div>
-            <button id="btn-prev" disabled>prev</button>
-            <button id="btn-next" disabled>next</button>
+        <div class="tracks-selection-area">
+            <ol id="track-list"></ol>
         </div>
-    </section>
+    </aside>
 
-    <section aria-label="playlist">
-        <h2>tracks (<span id="track-count">0</span>)</h2>
-        <ol id="track-list"></ol>
-    </section>
+    <main class="panel player-panel" aria-label="player">
+        <div class="artwork-wrapper">
+            <img id="now-playing-art" alt="album art not found" hidden>
+            <span class="artwork-placeholder">no track</span>
+        </div>
 
+        <div class="player-controls-container">
+            <audio id="audio" controls></audio>
+
+            <div class="transport-buttons"> <!-- is that what its called??? -->
+                <button id="btn-prev" disabled>prev</button>
+                <button id="btn-next" disabled>next</button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <aside class="panel info-panel" aria-label="track details">
+        <div class="info-header">media info</div>
+
+        <div class="info-body">
+            <h2 id="now-playing-title">no track</h2>
+
+            <div class="metadata-group"></div>
+                <p id="now-playing-artist"></p>
+                <p id="now-playing-album"></p>
+                <p id="now-playing-year"></p>
+
+            </div>
+
+            <div class="tech-specs-card">
+                <p id="now-playing-details"></p>
+                <p id="now-playing-meta">format: - | size: -</p>
+            </div>
+        </div>
+</aside>
+</div>
     <script type="module" src="./js/app.js"></script>
 </body>
 </html>

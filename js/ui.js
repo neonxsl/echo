@@ -104,15 +104,15 @@ export function updateNowPlaying(track, index, totalTracks) {
     }
 
     dom.nowPlayingTitle.textContent = `${index + 1}. ${track.title}`;
-    dom.nowPlayingArtist.textContent = `Artist: ${track.artist}`;
-    dom.nowPlayingAlbum.textContent = `Album: ${track.album}${track.year ? ` (${track.year})` : ''}`;
+    dom.nowPlayingArtist.textContent = `artist: ${track.artist}`;
+    dom.nowPlayingAlbum.textContent = `album: ${track.album}${track.year ? ` (${track.year})` : ''}`;
   
     const detailParts = [];
-    if (track.genre) detailParts.push(`Genre: ${track.genre}`);
-    if (track.bitrate) detailParts.push(`Bitrate: ${track.bitrate}`);
+    if (track.genre) detailParts.push(`genre: ${track.genre}`);
+    if (track.bitrate) detailParts.push(`bitrate: ${track.bitrate}`);
     dom.nowPlayingDetails.textContent = detailParts.join(' | ');
 
-    dom.nowPlayingMeta.textContent = `Format: ${mimeType} | Size: ${sizeMb} MB`;
+    dom.nowPlayingMeta.textContent = `format: ${mimeType} | size: ${sizeMb} MB`;
 
 
     dom.btnNext.disabled = index === totalTracks - 1;
