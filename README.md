@@ -23,7 +23,7 @@ live at: https://echo.neonxsl.dev
 - lyric view!!! - thanks a ton to am-lyrics by binimum (ily) https://github.com/binimum/am-lyrics
 - search feature and shuffle and playback controls: qol stuff
 
-<img width="415" height="473" alt="Screenshot 2026-09-29 at 9 12 00 pm" src="https://github.com/user-attachments/assets/01e0e3ad-a39a-45cd-b1fa-4bc428e2cac1" />
+<img width="1291" height="975" alt="Screenshot 2026-09-30 at 12 36 00 pm" src="https://github.com/user-attachments/assets/81d3907e-41e1-4897-aeb6-d2de2c892db3" />
 
 ---
 
@@ -45,7 +45,8 @@ live at: https://echo.neonxsl.dev
 | H | toggle keyboard controls cheat sheet (help menu) |
 | Tab | strictly banned (triggers notification) |
 
-<img width="451" height="501" alt="Screenshot 2026-09-29 at 9 15 46 pm" src="https://github.com/user-attachments/assets/ea6c5ee0-45d9-4387-957b-6055d54e6a5d" />
+<img width="415" height="473" alt="Screenshot 2026-09-29 at 9 12 00 pm" src="https://github.com/user-attachments/assets/01e0e3ad-a39a-45cd-b1fa-4bc428e2cac1" />
+<img width="451" height="501" alt="Screenshot 2026-09-29 at 9 15 46 pm" src="https://github.com/user-attachments/assets/ea6c5ee0-45d9-4387-957b-6055d54e6a5d" /> 
 
 ---
 
@@ -58,9 +59,8 @@ live at: https://echo.neonxsl.dev
 - transcoding: ffmpeg
 - lyrics: am-lyrics
 
-per word lyrics:
 
-<img width="451" height="945" alt="Screenshot 2026-09-29 at 9 15 09 pm" src="https://github.com/user-attachments/assets/0afe96ac-8fc4-4773-9c28-60997640ff22" />
+
 
 
 ---
